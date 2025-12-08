@@ -47,7 +47,8 @@ public class WnItemNoteServices {
 
             // Store to DB
             delegator.create(note);
-
+            String module = "WnItemNoteServices";
+            Debug.logInfo("==================================Current Timestamp: " + UtilDateTime.nowTimestamp(), module);
             // return success + redirect URL
             result.put("noteId", noteId);
             result.put("responseMessage", "success");
