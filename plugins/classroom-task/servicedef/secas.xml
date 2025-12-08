@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-eca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/service-eca.xsd">
+
+    <!-- When updateClsTaskStatus is invoked, call logClsTaskStatusChange synchronously -->
+    <eca service="updateClsTask" event="invoke">
+        <action service="logClsTaskStatusChange" mode="sync"/>
+    </eca>
+
+</service-eca>

@@ -1,0 +1,54 @@
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+
+    <service name="createClsTask" engine="java"
+             location="src.main.java.test.org.ClassroomTaskServices"
+             invoke="createClsTask" auth="true">
+        <attribute name="taskId" type="String" mode="IN"/>
+        <attribute name="title" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN"/>
+        <attribute name="assignedTo" type="String" mode="IN"/>
+        <attribute name="statusId" type="String" mode="IN"/>
+        <attribute name="dueDate" type="String" mode="IN"/>
+        <attribute name="createdDate" type="String" mode="IN"/>
+        <attribute name="lastUpdatedDate" type="String" mode="IN"/>
+    </service>
+
+    <service name="updateClsTask" engine="java"
+             location="src.main.java.test.org.ClassroomTaskServices"
+             invoke="updateClsTask" auth="true">
+        <attribute name="taskId" type="String" mode="IN"/>
+        <attribute name="title" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN"/>
+        <attribute name="assignedTo" type="String" mode="IN"/>
+        <attribute name="statusId" type="String" mode="IN"/>
+        <attribute name="dueDate" type="String" mode="IN"/>
+        <attribute name="lastUpdatedDate" type="String" mode="IN"/>
+    </service>
+
+    <service name="deleteClsTask" engine="java"
+             location="src.main.java.test.org.ClassroomTaskServices"
+             invoke="deleteClsTask" auth="true">
+        <attribute name="taskId" type="String" mode="IN"/>
+    </service>
+
+    <service name="findClsTask" engine="java"
+             location="src.main.java.test.org.ClassroomTaskServices"
+             invoke="findClsTask" auth="true">
+
+        <attribute name="taskId" type="String" mode="IN" optional="true"/>
+        <attribute name="title" type="String" mode="IN" optional="true"/>
+        <attribute name="assignedTo" type="String" mode="IN" optional="true"/>
+        <attribute name="taskList" type="List" mode="OUT"/>
+    </service>
+
+    <!-- SECA LOG -->
+    <service name="logClsTaskStatusChange"
+             engine="java"
+             location="src.main.java.test.org.ClassroomTaskServices"
+             invoke="logClsTaskStatusChange"
+             auth="true">
+
+        <attribute name="taskId" type="String" mode="IN" optional="false"/>
+    </service>
+</services>
