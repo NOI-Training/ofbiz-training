@@ -1,4 +1,4 @@
-package src.main.java.test.org;
+package test.org;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -179,7 +179,7 @@ public class ClassroomTaskServices {
     }
 
 
-/* SECA logging */
+    /* SECA logging */
     public static Map<String, Object> logClsTaskStatusChange(DispatchContext dctx, Map<String, ? extends Object> context) {
 
         // Extract taskId from context
@@ -191,4 +191,15 @@ public class ClassroomTaskServices {
         // Return success
         return ServiceUtil.returnSuccess();
     }
+    public static Map<String, Object> logClsTaskStatusCreate(DispatchContext dctx,
+                                                             Map<String, Object> context) {
+
+        String taskId = (String) context.get("taskId");
+
+        Debug.logInfo("=======================EECA✅ ClsTask created successfully. ID = " + taskId,
+                "CLASSROOM_TASK_ECA===============================");
+
+        return ServiceUtil.returnSuccess();
+    }
+
 }

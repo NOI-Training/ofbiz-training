@@ -2,7 +2,7 @@
           xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
 
     <service name="createClsTask" engine="java"
-             location="src.main.java.test.org.ClassroomTaskServices"
+             location="test.org.ClassroomTaskServices"
              invoke="createClsTask" auth="true">
         <attribute name="taskId" type="String" mode="IN"/>
         <attribute name="title" type="String" mode="IN"/>
@@ -15,7 +15,7 @@
     </service>
 
     <service name="updateClsTask" engine="java"
-             location="src.main.java.test.org.ClassroomTaskServices"
+             location="test.org.ClassroomTaskServices"
              invoke="updateClsTask" auth="true">
         <attribute name="taskId" type="String" mode="IN"/>
         <attribute name="title" type="String" mode="IN"/>
@@ -27,13 +27,13 @@
     </service>
 
     <service name="deleteClsTask" engine="java"
-             location="src.main.java.test.org.ClassroomTaskServices"
+             location="test.org.ClassroomTaskServices"
              invoke="deleteClsTask" auth="true">
         <attribute name="taskId" type="String" mode="IN"/>
     </service>
 
     <service name="findClsTask" engine="java"
-             location="src.main.java.test.org.ClassroomTaskServices"
+             location="test.org.ClassroomTaskServices"
              invoke="findClsTask" auth="true">
 
         <attribute name="taskId" type="String" mode="IN" optional="true"/>
@@ -45,10 +45,17 @@
     <!-- SECA LOG -->
     <service name="logClsTaskStatusChange"
              engine="java"
-             location="src.main.java.test.org.ClassroomTaskServices"
+             location="test.org.ClassroomTaskServices"
              invoke="logClsTaskStatusChange"
              auth="true">
 
         <attribute name="taskId" type="String" mode="IN" optional="false"/>
+    </service>
+    <service name="logClsTaskStatusCreate"
+             engine="java"
+             location="test.org.ClassroomTaskServices"
+             invoke="logClsTaskStatusCreate"
+             auth="true">
+    <attribute name="taskId" type="String" mode="IN" optional="false"/>
     </service>
 </services>
