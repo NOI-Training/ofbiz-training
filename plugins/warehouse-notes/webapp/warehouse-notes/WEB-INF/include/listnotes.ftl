@@ -109,7 +109,7 @@
 
 <script>
 function confirmDelete(noteId) {
-    return confirm("Are you sure you want to delete NOtes ID: " + noteId + " ?");
+    return confirm("Are you sure you want to delete Notes ID: " + noteId + " ?");
 }
 </script>
 <div class="notes-container">
