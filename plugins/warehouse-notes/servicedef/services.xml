@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
+    <description>Warehouse-notes Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
+        </description>
+    </service>
+    <service name="createWnItemNote"
+             engine="java"
+             location="com.companyname.service.WnItemNoteServices"
+             invoke="createWnItemNote"
+             auth="false">
+        <description>Create a note for an Inventory Item</description>
+        <attribute name="inventoryItemId" type="String" mode="IN" optional="false"/>
+        <attribute name="noteText"        type="String" mode="IN" optional="false"/>
+        <attribute name="visibilityFlag"  type="String" mode="IN" optional="true"/>
+        <attribute name="noteId" type="String" mode="OUT"/>
+    </service>
+    <service name="listWnItemNotes"
+             engine="java"
+             location="com.companyname.service.WnItemNoteServices"
+             invoke="findNotes"
+             auth="false">
+        <description>List notes for an inventory item</description>
+        <attribute name="inventoryItemId" type="String" mode="IN" optional="true"/>
+        <attribute name="listIt" type="List" mode="OUT"/>
+    </service>
+    <service name="updateWnNoteVisibility"
+             engine="java"
+             location="com.companyname.service.WnItemNoteServices"
+             invoke="updateNote"
+             auth="false">
+        <description>Update an existing note</description>
+        <attribute name="noteId" type="String" mode="IN"/>
+        <attribute name="inventoryItemId" type="String" mode="IN"/>
+        <attribute name="noteText" type="String" mode="IN" />
+        <attribute name="visibilityFlag" type="String" mode="IN"/>
+    </service>
+    <service name="visibilityFlag"
+             engine="java"
+             location="com.companyname.service.WnItemNoteServices"
+             invoke="printEcaTriggered">
+        <description>Print ECA Triggered</description>
+    </service>
+    <service name="logVisibilityChange"
+             engine="java"
+             location="com.companyname.service.WnItemNoteServices"
+             invoke="logVisibilityChange">
+        <description>Logs visibility change for notes</description>
+        <attribute name="noteId" type="String" mode="IN" optional="true"/>
+        <attribute name="visibilityFlag" type="String" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteWnItemNote"
+             engine="java"
+             location="com.companyname.service.WnItemNoteServices"
+             invoke="deleteWnItemNote">
+        <description>Deletes a warehouse item note</description>
+
+        <attribute name="noteId" type="String" mode="IN" optional="false"/>
+    </service>
+
+</services>
