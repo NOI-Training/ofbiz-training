@@ -104,6 +104,19 @@
 .button-link:hover {
     background-color: #218838;
 }
+.button-link-delete {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.button-link-delete:hover {
+    background-color: red;
+}
 </style>
 
 
@@ -146,7 +159,7 @@ function confirmDelete(noteId) {
                         <a class="button-link" href="updateVisibility?noteId=${note.noteId}">Update</a>
                     </td>
                     <td>
-                        <a class="button-link"
+                        <a class="button-link-delete"
                               href="deleteWnItemNote?noteId=${note.noteId}"
                               onclick="return confirmDelete('${note.noteId}');">
                                Delete
