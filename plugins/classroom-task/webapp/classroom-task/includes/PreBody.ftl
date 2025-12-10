@@ -18,13 +18,14 @@
 <!-- NAVBAR -->
 <header class="navbar">
     <div class="nav-left">
-        <span class="nav-title">📘 ${uiLabelMap.ClsTaskApplication}</span>
+        <span class="nav-title">
+                       <img src="<@ofbizContentUrl>/classroom-task/images/blue-book.png</@ofbizContentUrl>"  style="height: 15px; width: auto;" />${uiLabelMap.ClsTaskApplication}
+        </span>
     </div>
 
     <nav class="nav-right">
         <a class="nav-link" href="<@ofbizUrl>FindClsTask</@ofbizUrl>">${uiLabelMap.ClsTaskMenuList}</a>
         <a class="nav-link" href="<@ofbizUrl>AddClsTask</@ofbizUrl>">${uiLabelMap.ClsTaskMenuAdd}</a>
-        <a class="nav-link" href="<@ofbizUrl>UpdateClsTask</@ofbizUrl>">${uiLabelMap.ClsTaskMenuUpdate}</a>
         <a class="nav-link logout" href="<@ofbizUrl>logout</@ofbizUrl>">Logout</a>
     </nav>
 </header>

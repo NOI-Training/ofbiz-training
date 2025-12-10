@@ -13,6 +13,7 @@
     text-align: center;
     margin-bottom: 20px;
     color: #1E2A38;
+    font-weight: 700;
 }
 
 /* ----- FORM GROUP ----- */
@@ -25,15 +26,18 @@
     margin-bottom: 6px;
     font-weight: 600;
     color: #374151;
+    font-size: 14px;
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
     padding: 10px 12px;
     border-radius: 6px;
     border: 1px solid #D1D5DB;
     font-size: 14px;
+    background: #F9FAFB;
 }
 
 .form-group textarea {
@@ -43,7 +47,7 @@
 
 /* ----- BUTTON ----- */
 .submit-btn {
- background: #1E2A38;
+    background: #1E2A38;
     color: white;
     border: none;
     padding: 12px;
@@ -64,11 +68,6 @@
     <h2>➕ Create Classroom Task</h2>
 
     <form method="post" action="<@ofbizUrl>createClsTask</@ofbizUrl>">
-
-        <div class="form-group">
-            <label>Task ID *</label>
-            <input type="text" name="taskId" placeholder="Enter unique Task ID" required>
-        </div>
 
         <div class="form-group">
             <label>Title *</label>
@@ -93,17 +92,6 @@
         <div class="form-group">
             <label>Due Date</label>
             <input type="date" name="dueDate">
-        </div>
-
-        <!-- Optional but kept as you requested -->
-        <div class="form-group">
-            <label>Created Date</label>
-            <input type="datetime-local" name="createdDate">
-        </div>
-
-        <div class="form-group">
-            <label>Last Updated Date</label>
-            <input type="datetime-local" name="lastUpdatedDate">
         </div>
 
         <button class="submit-btn" type="submit">✅ Create Task</button>

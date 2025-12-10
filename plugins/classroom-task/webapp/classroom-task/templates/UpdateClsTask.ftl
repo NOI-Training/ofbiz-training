@@ -75,7 +75,7 @@
             <label>Task ID</label>
             <input type="text" name="taskId"
                    value="${parameters.taskId!}"
-                  >
+                  readonly>
         </div>
 
         <!-- Title -->
@@ -115,11 +115,6 @@
             <input type="date" name="dueDate">
         </div>
 
-        <!-- Last Updated Date (optional; if blank Java will set now) -->
-        <div class="form-group">
-            <label>Last Updated Date</label>
-            <input type="datetime-local" name="lastUpdatedDate">
-        </div>
 
         <button class="update-btn" type="submit">✅ Update Task</button>
 

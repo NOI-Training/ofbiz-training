@@ -1,203 +1,209 @@
 package test.org;
 
-import java.sql.Timestamp;
 import java.util.*;
 
 import org.apache.ofbiz.base.util.Debug;
-import org.apache.ofbiz.base.util.UtilDateTime;
-import org.apache.ofbiz.entity.*;
-import org.apache.ofbiz.entity.condition.*;
-import org.apache.ofbiz.service.*;
+import org.apache.ofbiz.entity.Delegator;
+import org.apache.ofbiz.entity.GenericValue;
+import org.apache.ofbiz.entity.condition.EntityCondition;
+import org.apache.ofbiz.entity.condition.EntityOperator;
+import org.apache.ofbiz.service.DispatchContext;
+import org.apache.ofbiz.service.ServiceUtil;
 
 public class ClassroomTaskServices {
 
     private static final String MODULE = ClassroomTaskServices.class.getName();
 
-    /* Parse date / datetime-local */
-    private static Timestamp parseHtmlDate(String val) {
-        if (val == null || val.trim().isEmpty()) return null;
-        try {
-            if (val.contains("T")) {
-                return Timestamp.valueOf(val.replace("T", " ") + ":00");
-            }
-            return Timestamp.valueOf(val + " 00:00:00");
-        } catch (Exception e) {
-            Debug.logError("Bad date: " + val, MODULE);
-            return null;
-        }
-    }
+    /* --------------------------------------------------
+   CREATE TASK
+   Default OFBiz stamp fields (createdStamp, createdDate,
+   lastUpdatedStamp, etc.) are automatically populated
+-------------------------------------------------- */
+    public static Map<String, Object> createClsTask(
+            DispatchContext dctx, Map<String, ?> context) {
 
-    /* CREATE */
-    public static Map<String, Object> createClsTask(DispatchContext dctx, Map<String, ?> ctx) {
-
-        // Get Delegator to interact with database
         Delegator delegator = dctx.getDelegator();
 
-        // Read required parameters from input context
-        String taskId = (String) ctx.get("taskId");
-        String title = (String) ctx.get("title");
-
-        // Validate mandatory fields
-        if (taskId == null || title == null)
-            return ServiceUtil.returnError("TaskId and Title required");
-
-        // Check if task already exists
         try {
-            if (delegator.findOne("ClsTask", false, "taskId", taskId) != null) {
-                return ServiceUtil.returnError("Task already exists");
-            }
+            // ✅ Auto-generate primary key using OFBiz Sequencer
+            String taskId = delegator.getNextSeqId("ClsTask");
 
-            // Create empty GenericValue for ClsTask entity
             GenericValue gv = delegator.makeValue("ClsTask");
+
             gv.put("taskId", taskId);
-            gv.put("title", title);
-            gv.put("description", ctx.get("description"));
-            gv.put("assignedTo", ctx.get("assignedTo"));
-            gv.put("statusId", ctx.get("statusId"));
-            gv.put("dueDate", parseHtmlDate((String) ctx.get("dueDate")));
+            gv.put("title", context.get("title"));
+            gv.put("description", context.get("description"));
+            gv.put("assignedTo", context.get("assignedTo"));
+            gv.put("statusId", context.get("statusId"));
+            gv.put("dueDate", context.get("dueDate"));
 
-            // Get current timestamp
-            Timestamp now = UtilDateTime.nowTimestamp();
-
-            // Set created date (input or current time)
-            gv.put("createdDate",
-                    parseHtmlDate((String) ctx.get("createdDate")) != null
-                            ? parseHtmlDate((String) ctx.get("createdDate")) : now);
-
-            // Set updated date (input or current time)
-            gv.put("lastUpdatedDate",
-                    parseHtmlDate((String) ctx.get("lastUpdatedDate")) != null
-                            ? parseHtmlDate((String) ctx.get("lastUpdatedDate")) : now);
-
-            // Insert record into database
+            // ✅ Create record
             delegator.create(gv);
 
-            // Return success response
-            return ServiceUtil.returnSuccess();
+            // ✅ Prepare response
+            Map<String, Object> result = ServiceUtil.returnSuccess();
+            result.put("taskId", taskId);
+            return result;
 
         } catch (Exception e) {
-            // Log exception
             Debug.logError(e, MODULE);
-            // Return error response
             return ServiceUtil.returnError(e.getMessage());
         }
     }
 
-    /* UPDATE */
-    public static Map<String, Object> updateClsTask(DispatchContext dctx, Map<String, ?> ctx) {
+    /* --------------------------------------------------
+       UPDATE TASK
+       ✅ lastUpdatedDate / lastUpdatedStamp handled automatically
+    -------------------------------------------------- */
+    public static Map<String, Object> updateClsTask(
+            DispatchContext dctx, Map<String, ?> context) {
+
         Delegator delegator = dctx.getDelegator();
 
         try {
-            // Find existing task by primary key
-            GenericValue gv = delegator.findOne("ClsTask", false, "taskId", ctx.get("taskId"));
+            GenericValue task = delegator.findOne(
+                    "ClsTask", false, "taskId", context.get("taskId"));
 
-            // If task not found, return error
-            if (gv == null) return ServiceUtil.returnError("Task not found");
+            if (task == null) {
+                return ServiceUtil.returnError("Task not found");
+            }
 
-            // Update fields
-            gv.put("title", ctx.get("title"));
-            gv.put("description", ctx.get("description"));
-            gv.put("assignedTo", ctx.get("assignedTo"));
-            gv.put("statusId", ctx.get("statusId"));
-            gv.put("dueDate", parseHtmlDate((String) ctx.get("dueDate")));
+            task.put("title", context.get("title"));
+            task.put("description", context.get("description"));
+            task.put("assignedTo", context.get("assignedTo"));
+            task.put("statusId", context.get("statusId"));
+            task.put("dueDate", context.get("dueDate"));
 
-            // Update lastUpdatedDate
-            gv.put("lastUpdatedDate",
-                    parseHtmlDate((String) ctx.get("lastUpdatedDate")) != null
-                            ? parseHtmlDate((String) ctx.get("lastUpdatedDate"))
-                            : UtilDateTime.nowTimestamp());
+            // ✅ CORRECT OFBiz API
+            task.store();
 
-            // Save changes to database
-            gv.store();
             return ServiceUtil.returnSuccess();
-
         } catch (Exception e) {
+            Debug.logError(e, MODULE);
             return ServiceUtil.returnError(e.getMessage());
         }
     }
 
-    /* DELETE */
-    public static Map<String, Object> deleteClsTask(DispatchContext dctx, Map<String, ?> ctx) {
-        try {
-            // Find task by primary key
-            GenericValue gv = dctx.getDelegator()
-                    .findOne("ClsTask", false, "taskId", ctx.get("taskId"));
+    /* --------------------------------------------------
+       DELETE TASK
+    -------------------------------------------------- */
+    public static Map<String, Object> deleteClsTask(
+            DispatchContext dctx, Map<String, ?> context) {
 
-            // If record exists, remove it
-            if (gv != null) gv.remove();
-
-            // Return success
-            return ServiceUtil.returnSuccess();
-        } catch (Exception e) {
-            return ServiceUtil.returnError(e.getMessage());
-        }
-    }
-
-    /* FIND */
-    public static Map<String, Object> findClsTask(DispatchContext dctx, Map<String, ?> ctx) {
         Delegator delegator = dctx.getDelegator();
 
-        // List to hold search conditions
-        List<EntityCondition> conds = new ArrayList<>();
+        try {
+            GenericValue task = delegator.findOne(
+                    "ClsTask", false, "taskId", context.get("taskId"));
 
-        String taskId = (String) ctx.get("taskId");
-        String title = (String) ctx.get("title");
-        String assignedTo = (String) ctx.get("assignedTo");
+            if (task != null) {
+                task.remove();
+            }
+            return ServiceUtil.returnSuccess();
+        } catch (Exception e) {
+            Debug.logError(e, MODULE);
+            return ServiceUtil.returnError(e.getMessage());
+        }
+    }
 
-        // Add condition if taskId provided
+    /* --------------------------------------------------
+       FIND TASKS
+       ✅ All default stamp fields returned automatically:
+       createdDate, lastUpdatedDate,
+       createdStamp, createdTxStamp,
+       lastUpdatedStamp, lastUpdatedTxStamp
+    -------------------------------------------------- */
+    public static Map<String, Object> findClsTask(
+            DispatchContext dctx, Map<String, ?> context) {
+
+        Delegator delegator = dctx.getDelegator();
+        List<EntityCondition> conditions = new ArrayList<>();
+
+        String taskId = (String) context.get("taskId");
+        String title = (String) context.get("title");
+        String assignedTo = (String) context.get("assignedTo");
+
         if (taskId != null && !taskId.trim().isEmpty()) {
-            conds.add(EntityCondition.makeCondition("taskId", taskId.trim()));
+            conditions.add(EntityCondition.makeCondition("taskId", taskId.trim()));
         }
-
-        // Add LIKE condition for title
         if (title != null && !title.trim().isEmpty()) {
-            conds.add(EntityCondition.makeCondition(
+            conditions.add(EntityCondition.makeCondition(
                     "title", EntityOperator.LIKE, "%" + title.trim() + "%"));
         }
-
-        // Add condition for assignedTo
         if (assignedTo != null && !assignedTo.trim().isEmpty()) {
-            conds.add(EntityCondition.makeCondition("assignedTo", assignedTo.trim()));
+            conditions.add(EntityCondition.makeCondition("assignedTo", assignedTo.trim()));
         }
 
+        // ✅ Pagination defaults
+        Integer viewIndex = (Integer) context.get("viewIndex");
+        Integer viewSize = (Integer) context.get("viewSize");
+
+        if (viewIndex == null || viewIndex < 0) viewIndex = 0;
+        if (viewSize == null || viewSize <= 0) viewSize = 5;   // 👈 keep small to see buttons
+
+        int lowIndex = viewIndex * viewSize;
+
         try {
-            // Fetch list from database
-            List<GenericValue> list = delegator.findList(
+            // ✅ Full list (for listSize)
+            List<GenericValue> fullList = delegator.findList(
                     "ClsTask",
-                    conds.isEmpty() ? null : EntityCondition.makeCondition(conds, EntityOperator.AND),
+                    conditions.isEmpty() ? null :
+                            EntityCondition.makeCondition(conditions, EntityOperator.AND),
                     null, null, null, false);
 
-            // Prepare success response
-            Map<String, Object> res = ServiceUtil.returnSuccess();
-            // Attach result list
-            res.put("taskList", list);
-            return res;
+            int listSize = fullList.size();
+
+            // ✅ Sorted list
+            List<GenericValue> sortedList = delegator.findList(
+                    "ClsTask",
+                    conditions.isEmpty() ? null :
+                            EntityCondition.makeCondition(conditions, EntityOperator.AND),
+                    null,
+                    Arrays.asList("lastUpdatedStamp DESC"),
+                    null,
+                    false);
+
+            int highIndex = Math.min(lowIndex + viewSize, listSize);
+            List<GenericValue> taskList =
+                    (lowIndex < highIndex) ? sortedList.subList(lowIndex, highIndex) : new ArrayList<>();
+
+            Map<String, Object> result = ServiceUtil.returnSuccess();
+            result.put("taskList", taskList);
+            result.put("listSize", listSize);
+            result.put("viewIndex", viewIndex);
+            result.put("viewSize", viewSize);
+
+            return result;
 
         } catch (Exception e) {
+            Debug.logError(e, MODULE);
             return ServiceUtil.returnError(e.getMessage());
         }
     }
 
+    /* --------------------------------------------------
+       SECA / EECA LOGGING
+    -------------------------------------------------- */
+    public static Map<String, Object> logClsTaskStatusCreate(
+            DispatchContext dctx, Map<String, ?> context) {
 
-    /* SECA logging */
-    public static Map<String, Object> logClsTaskStatusChange(DispatchContext dctx, Map<String, ? extends Object> context) {
-
-        // Extract taskId from context
-        String taskId = (String) context.get("taskId");
-
-        // Log successful update information
-        Debug.logInfo("=================================SECA: Task [" + taskId + "] Update Successfully ======================================", MODULE);
-
-        // Return success
+        Debug.logInfo("================================ ClsTask created. ID = " + context.get("taskId")+"=============================", MODULE);
         return ServiceUtil.returnSuccess();
     }
-    public static Map<String, Object> logClsTaskStatusCreate(DispatchContext dctx,
-                                                             Map<String, Object> context) {
 
-        String taskId = (String) context.get("taskId");
+    public static Map<String, Object> logClsTaskStatusChange(
+            DispatchContext dctx, Map<String, ?> context) {
 
-        Debug.logInfo("=======================EECA✅ ClsTask created successfully. ID = " + taskId,
-                "CLASSROOM_TASK_ECA===============================");
+        Debug.logInfo("============================= ClsTask updated. ID = " + context.get("taskId")+"=============================", MODULE);
+        return ServiceUtil.returnSuccess();
+    }
+    public static Map<String, Object> JobScheduler(
+            DispatchContext dctx,
+            Map<String, ? extends Object> context) {
+
+        System.out.println("==================================");
+        System.out.println("Your Job Scheduler Runs Successfully In Backend Tasks");
+        System.out.println("==================================");
 
         return ServiceUtil.returnSuccess();
     }

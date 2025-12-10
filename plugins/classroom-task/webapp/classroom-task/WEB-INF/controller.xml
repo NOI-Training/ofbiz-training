@@ -60,6 +60,13 @@ under the License.
         <response name="success" type="view" value="FindClsTask"/>
         <response name="error" type="view" value="AddClsTask"/>
     </request-map>
+    <request-map uri="getTasks">
+        <security https="true" auth="false"/>
+        <event type="java"
+               path="test.org.getTasks"
+               invoke="getTasks"/>
+        <response name="success" type="none"/>
+    </request-map>
 
     <!-- Show update page (controller just maps to UpdateClsTask view) -->
     <request-map uri="UpdateClsTask">
