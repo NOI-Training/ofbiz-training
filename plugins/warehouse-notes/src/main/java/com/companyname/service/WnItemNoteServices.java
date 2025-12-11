@@ -72,23 +72,27 @@ public class WnItemNoteServices {
         Delegator delegator = dctx.getDelegator();
         Map<String, Object> result = ServiceUtil.returnSuccess();
 
+        int page = 1;
+        if (context.get("page") != null) {
+            page = Integer.parseInt(context.get("page").toString());
+        }
+        int pageSize = 5;
+
         try {
             String inventoryItemId = (String) context.get("inventoryItemId");
             List<GenericValue> notes;
 
-            // Fetch notes based on inventoryItemId (or all if null/empty)
             if (inventoryItemId != null && !inventoryItemId.isEmpty()) {
                 notes = delegator.findByAnd(
                         "WnItemNote",
                         Map.of("inventoryItemId", inventoryItemId),
-                        null,   // orderBy
-                        false   // useCache
+                        null,
+                        false
                 );
             } else {
                 notes = delegator.findAll("WnItemNote", false);
             }
 
-            // Map only the fields needed for the list form
             List<Map<String, Object>> cleanList = new ArrayList<>();
             for (GenericValue note : notes) {
                 Map<String, Object> map = new HashMap<>();
@@ -98,13 +102,23 @@ public class WnItemNoteServices {
                 map.put("visibilityFlag", note.get("visibilityFlag"));
                 cleanList.add(map);
             }
-            result.put("listIt", cleanList);
+
+            int totalRecords = cleanList.size();
+            int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+            int start = (page - 1) * pageSize;
+            int end = Math.min(start + pageSize, totalRecords);
+
+            List<Map<String, Object>> pagedList = cleanList.subList(start, end);
+
+            result.put("listIt", pagedList);
+            result.put("page", page);
+            result.put("totalPages", totalPages);
+            return result;
 
         } catch (GenericEntityException e) {
             return ServiceUtil.returnError("Error finding notes: " + e.getMessage());
         }
-
-        return result;
     }
 
     public static Map<String, Object> updateNote(DispatchContext dctx, Map<String, ? extends Object> context) {

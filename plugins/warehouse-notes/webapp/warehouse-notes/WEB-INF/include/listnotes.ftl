@@ -1,122 +1,138 @@
 <style>
 /* Container */
 .notes-container {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 30px auto;
-    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* Search Form */
-.search-form {
+/* Wrap both forms in a single row */
+.search-form,
+.create-form {
     display: flex;
     align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
+.search-form {
+    flex-wrap: wrap;
+}
+
+/* Make Create button next to Find button */
+.create-form {
+    margin-left: 10px;
+}
+
+/* Inputs */
 .search-form label {
-    margin-right: 10px;
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
 }
 
 .search-form input[type="text"] {
-    padding: 8px;
+    padding: 8px 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
+    outline: none;
     font-size: 14px;
-    flex: 1;
-    margin-right: 10px;
-    transition: border-color 0.3s;
+    transition: 0.2s;
 }
 
 .search-form input[type="text"]:focus {
-    border-color: #007BFF;
-    outline: none;
+    border-color: #000;
+    box-shadow: 0 0 4px rgba(0,0,0,0.4);
 }
 
-.search-form button {
-    background-color: #007BFF;
+/* BLACK BUTTONS */
+.search-form button,
+.create-form button,
+.pagination a {
+    background: #000;
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
+    padding: 8px 14px;
+    border-radius: 6px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.3s;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.25s;
 }
 
-.search-form button:hover {
-    background-color: #0056b3;
+.search-form button:hover,
+.create-form button:hover,
+.pagination a:hover {
+    background: #333;
 }
 
-.search-form button img {
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-}
-
-/* Notes Table */
+/* Table */
 .notes-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.notes-table th, .notes-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+.notes-table thead {
+    background: #f3f6fb;
+}
+
+.notes-table th,
+.notes-table td {
+    padding: 12px 14px;
     text-align: left;
-}
-
-.notes-table th {
-    background-color: #f4f6f8;
-    font-weight: bold;
-}
-
-.notes-table tr:nth-child(even) {
-    background-color: #fafafa;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 14px;
 }
 
 .notes-table tr:hover {
-    background-color: #f1f5f9;
+    background: #f9fbff;
 }
 
-.notes-table a {
-    color: white;
+/* Update/Delete Buttons */
+.button-link,
+.button-link-delete {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
     text-decoration: none;
-}
-
-.notes-table a:hover {
-    text-decoration: underline;
+    font-weight: 600;
+    color: white;
+    transition: 0.2s;
 }
 
 .button-link {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #28a745;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 13px;
+    background: #00a86b;
 }
 
 .button-link:hover {
-    background-color: #218838;
+    background: #008f5b;
 }
+
 .button-link-delete {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 13px;
+    background: #e63946;
 }
 
 .button-link-delete:hover {
-    background-color: red;
+    background: #c62834;
 }
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.pagination a {
+    margin: 0 5px;
+    text-decoration: none;
+}
+
 </style>
 
 
@@ -171,5 +187,19 @@ function confirmDelete(noteId) {
         </table>
     <#else>
         <p>No notes found.</p>
+    </#if>
+</div>
+<#assign page = (page!1)?number>
+<#assign totalPages = (totalPages!1)?number>
+
+<div class="pagination">
+    <#if page?has_content && (page?number > 1)>
+        <a href="<@ofbizUrl>findNotesEvent?page=${page?number - 1}</@ofbizUrl>"><<</a>
+    </#if>
+
+    Page ${page!1} of ${totalPages!1}
+
+    <#if page?has_content && totalPages?has_content && (page?number < totalPages?number)>
+        <a href="<@ofbizUrl>findNotesEvent?page=${page?number + 1}</@ofbizUrl>">>></a>
     </#if>
 </div>

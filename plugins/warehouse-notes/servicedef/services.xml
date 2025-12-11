@@ -47,7 +47,12 @@ under the License.
              auth="false">
         <description>List notes for an inventory item</description>
         <attribute name="inventoryItemId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="page" type="Integer" mode="IN" optional="true"/>
+
         <attribute name="listIt" type="List" mode="OUT"/>
+        <attribute name="page" type="Integer" mode="OUT"/>
+        <attribute name="totalPages" type="Integer" mode="OUT"/>
     </service>
     <service name="updateWnNoteVisibility"
              engine="java"

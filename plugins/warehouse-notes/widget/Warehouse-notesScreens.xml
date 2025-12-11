@@ -57,6 +57,9 @@ under the License.
             <actions>
                 <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
                 <set field="listIt" from-field="parameters.listIt"/>
+                <set field="totalPages" from-field="parameters.totalPages"/>
+                <set field="page" from-field="parameters.page"/>
+                <set field="layoutSettings.styleSheets[]" value="/LMS/css/style.css"/>
             </actions>
             <widgets>
                 <decorator-screen name="Warehouse-notesCommonDecorator" location="${parameters.mainDecoratorLocation}">

@@ -3,18 +3,10 @@
     <title>${layoutSettings.companyName!""}</title>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
-    <#if webSiteFaviconContent?has_content>
-      <link rel="shortcut icon" href="${webSiteFaviconContent}">
-    </#if>
 
     <#-- Load CSS -->
     <#list layoutSettings.styleSheets as styleSheet>
       <link rel="stylesheet" href="${StringUtil.wrapString(styleSheet)}" type="text/css"/>
-    </#list>
-
-    <#-- Load JavaScript -->
-    <#list layoutSettings.javaScripts as javaScript>
-      <script type="text/javascript" src="${StringUtil.wrapString(javaScript)}"></script>
     </#list>
   </head>
   <style>
@@ -36,7 +28,7 @@
     /* --- Footer Styles --- */
     footer {
       flex-shrink: 0;
-      background-color: #343a40;
+      background-color: black;
       color: white;
       text-align: center;
       padding: 15px 0;
@@ -54,7 +46,7 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      background-color: #007bff;
+      background-color: black;
       overflow: hidden;
       border-radius: 5px;
     }
@@ -101,16 +93,16 @@
           <li>
                 <a href="<@ofbizUrl>main</@ofbizUrl>">Warehouse-Notes Portal</a>
           </li>
-            <li>
+          <li class="pull-right">
+                        <a href="<@ofbizUrl>logout</@ofbizUrl>" title="${uiLabelMap.CommonLogout}">logout</a>
+          </li>
+          <li class="pull-right">
+                          <a href="<@ofbizUrl>listNotes</@ofbizUrl>">Find Notes</a>
+          </li>
+            <li class="pull-right">
                  <a href="<@ofbizUrl>createNote</@ofbizUrl>">Add Notes</a>
             </li>
-            <li>
-                <a href="<@ofbizUrl>listNotes</@ofbizUrl>">Find Notes</a>
-            </li>
 
-            <li class="pull-right">
-              <a href="<@ofbizUrl>logout</@ofbizUrl>" title="${uiLabelMap.CommonLogout}">logout</a>
-            </li>
           </ul>
         </div>
       </div>

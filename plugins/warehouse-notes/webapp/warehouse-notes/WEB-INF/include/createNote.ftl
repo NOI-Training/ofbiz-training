@@ -56,7 +56,7 @@
 /* Submit Button */
 .form-container button[type="submit"] {
     padding: 12px;
-    background-color: #007BFF;
+    background-color: black;
     color: white;
     font-size: 16px;
     border: none;
