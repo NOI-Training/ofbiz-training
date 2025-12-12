@@ -1,0 +1,100 @@
+/* GLOBAL */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: #F5F7FA;
+    color: #333;
+
+    /* Sticky footer layout */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;   /* Required */
+}
+
+/* PAGE WRAPPER */
+.page-container {
+    padding: 30px;
+    flex: 1;   /* Pushes footer to bottom */
+}
+
+/* NAVBAR */
+.navbar {
+    background: #1E2A38;
+    padding: 12px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.nav-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.nav-right .nav-link {
+    margin-left: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.25s ease;
+}
+
+.nav-right .nav-link:hover {
+    background: #3B82F6;
+}
+
+.nav-right .logout {
+    background: #EF4444;
+}
+
+.nav-right .logout:hover {
+    background: #DC2626;
+}
+
+/* CARD UI */
+.card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
+}
+
+/* BUTTONS */
+.btn {
+    background: #3B82F6;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.25s ease;
+}
+
+.btn:hover {
+    background: #2563EB;
+}
+
+/* INPUT FIELDS */
+input,
+select,
+textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    background: #1E2A38;
+    padding: 12px;
+    color: #fff;
+}

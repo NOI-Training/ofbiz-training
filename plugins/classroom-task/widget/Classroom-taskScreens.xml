@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main">
+        <section>
+            <actions>
+                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="ClassroomTaskDecorator" location="component://classroom-task/widget/classroomTaskCommonScreen.xml">
+                    <decorator-section name="body">
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- Task list screen -->
+    <screen name="FindClsTask">
+        <section>
+            <actions>
+                <set field="taskId" from-field="parameters.taskId"/>
+                <set field="title" from-field="parameters.title"/>
+                <set field="assignedTo" from-field="parameters.assignedTo"/>
+
+                <service service-name="findClsTask"
+                         result-map-list="taskList">
+                    <field-map field-name="taskId" from-field="taskId"/>
+                    <field-map field-name="title" from-field="title"/>
+                    <field-map field-name="assignedTo" from-field="assignedTo"/>
+                </service>
+            </actions>
+
+            <widgets>
+                <decorator-screen name="ClassroomTaskDecorator"
+                                  location="component://classroom-task/widget/classroomTaskCommonScreen.xml">
+
+                    <decorator-section name="body">
+
+                        <platform-specific>
+                            <html>
+                                <html-template location="component://classroom-task/webapp/classroom-task/templates/FindClsTask.ftl"/>
+                            </html>
+                        </platform-specific>
+
+                        <platform-specific>
+                            <html>
+                                <html-template location="component://classroom-task/webapp/classroom-task/templates/ListClsTask.ftl"/>
+                            </html>
+                        </platform-specific>
+
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Create -->
+    <screen name="AddClsTask">
+        <section>
+            <actions>
+                <set field="headerItem" value="AddTask"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ClassroomTaskDecorator" location="component://classroom-task/widget/classroomTaskCommonScreen.xml">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html>
+                                <html-template location="component://classroom-task/webapp/classroom-task/templates/AddClsTask.ftl"/>
+                            </html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Update Status -->
+    <screen name="updateClsTask">
+        <section>
+            <actions>
+                <set field="headerItem" value="UpdateTask"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ClassroomTaskDecorator" location="component://classroom-task/widget/classroomTaskCommonScreen.xml">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html>
+                                <html-template location="component://classroom-task/webapp/classroom-task/templates/UpdateClsTask.ftl"/>
+                            </html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Create -->
+    <screen name="CommonError">
+        <section>
+            <actions>
+                <set field="headerItem" value="AddTask"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ClassroomTaskDecorator" location="component://classroom-task/widget/classroomTaskCommonScreen.xml">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html>
+                                <html-template location="component://classroom-task/webapp/classroom-task/templates/CommonError.ftl"/>
+                            </html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="aiHelp">
+        <section>
+            <actions>
+                <set field="headerItem" value="AddTask"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="ClassroomTaskDecorator" location="component://classroom-task/widget/classroomTaskCommonScreen.xml">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html>
+                                <html-template location="component://classroom-task/webapp/classroom-task/templates/aiHelp.ftl"/>
+                            </html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>

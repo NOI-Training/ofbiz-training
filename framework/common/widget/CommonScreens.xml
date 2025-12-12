@@ -236,7 +236,12 @@ under the License.
             </actions>
             <widgets>
                 <include-screen name="MinimalActions" />
-                <include-screen name="login" location="${groovy:commonScreenLocations.login?commonScreenLocations.login:commonDecoratorLocation}"/>
+<!--                <include-screen name="login" location="${groovy:commonScreenLocations.login?commonScreenLocations.login:commonDecoratorLocation}"/>-->
+                <platform-specific>
+                <html>
+                    <html-template location="component://classroom-task/webapp/classroom-task/templates/logins.ftl"/>
+                </html>
+                </platform-specific>
             </widgets>
         </section>
     </screen>
@@ -278,7 +283,12 @@ under the License.
         <section>
             <widgets>
                 <include-screen name="MinimalActions" />
-                <include-screen name="forgotPassword" location="${groovy:commonScreenLocations.forgotPassword?commonScreenLocations.forgotPassword:commonDecoratorLocation}"/>
+<!--                <include-screen name="forgotPassword" location="${groovy:commonScreenLocations.forgotPassword?commonScreenLocations.forgotPassword:commonDecoratorLocation}"/>-->
+                <platform-specific>
+                    <html>
+                        <html-template location="component://classroom-task/webapp/classroom-task/templates/forgotPassword.ftl"/>
+                    </html>
+                </platform-specific>
             </widgets>
         </section>
     </screen>

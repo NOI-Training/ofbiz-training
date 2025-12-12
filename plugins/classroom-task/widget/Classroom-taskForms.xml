@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+<!--    &lt;!&ndash; Create Task form (target createClsTask) &ndash;&gt;-->
+<!--    <form name="AddClsTask" type="single" target="createClsTask">-->
+<!--        <field name="taskId" title="${uiLabelMap.ClsTaskId}"><text/></field>-->
+<!--        <field name="title" title="${uiLabelMap.ClsTaskTitle}"><text/></field>-->
+<!--        <field name="description" title="${uiLabelMap.ClsTaskDescription}"><text/></field>-->
+<!--        <field name="assignedTo" title="${uiLabelMap.ClsTaskAssignedTo}"><text/></field>-->
+<!--        <field name="statusId" title="${uiLabelMap.ClsTaskStatus}"><text/></field>-->
+
+<!--        <field name="dueDate" title="${uiLabelMap.ClsTaskDueDate}">-->
+<!--            <date-time type="date"/>-->
+<!--        </field>-->
+
+<!--        &lt;!&ndash; createdDate / lastUpdatedDate (IN) &ndash;&gt;-->
+<!--        <field name="createdDate" title="${uiLabelMap.ClsTaskCreatedDate}">-->
+<!--            <date-time type="timestamp"/>-->
+<!--        </field>-->
+<!--        <field name="lastUpdatedDate" title="${uiLabelMap.ClsTaskLastUpdatedDate}">-->
+<!--            <date-time type="timestamp"/>-->
+<!--        </field>-->
+
+<!--        <field name="submitButton" title="${uiLabelMap.CommonAdd}"><submit button-type="button"/></field>-->
+<!--    </form>-->
+
+<!--    &lt;!&ndash; Find task form &ndash;&gt;-->
+<!--    <form name="FindClsTask" type="single" default-entity-name="ClsTask">-->
+<!--        <field name="noConditionFind"><hidden value="Y"/></field>-->
+<!--        <field name="taskId" title="${uiLabelMap.ClsTaskId}"><text-find/></field>-->
+<!--        <field name="title" title="${uiLabelMap.ClsTaskTitle}"><text-find/></field>-->
+<!--        <field name="assignedTo" title="${uiLabelMap.ClsTaskAssignedTo}"><text-find/></field>-->
+<!--        <field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>-->
+<!--    </form>-->
+
+<!--    &lt;!&ndash; List form &ndash;&gt;-->
+<!--    <form name="ListClsTask" type="list" list-name="taskList" default-entity-name="ClsTask" separate-columns="true">-->
+<!--        <actions>-->
+<!--            <service service-name="findClsTask" result-map="result" result-map-list="taskList">-->
+<!--                <field-map field-name="taskId" from-field="clsTaskCtx.taskId"/>-->
+<!--                <field-map field-name="title" from-field="clsTaskCtx.title"/>-->
+<!--                <field-map field-name="assignedTo" from-field="clsTaskCtx.assignedTo"/>-->
+<!--            </service>-->
+<!--        </actions>-->
+
+<!--        <field name="taskId" title="${uiLabelMap.ClsTaskId}"><display/></field>-->
+<!--        <field name="title" title="${uiLabelMap.ClsTaskTitle}"><display/></field>-->
+<!--        <field name="assignedTo" title="${uiLabelMap.ClsTaskAssignedTo}"><display/></field>-->
+<!--        <field name="statusId" title="${uiLabelMap.ClsTaskStatus}"><display/></field>-->
+<!--        <field name="dueDate" title="${uiLabelMap.ClsTaskDueDate}"><display/></field>-->
+
+<!--        <field name="createdDate" title="${uiLabelMap.ClsTaskCreatedDate}"><display/></field>-->
+<!--        <field name="lastUpdatedDate" title="${uiLabelMap.ClsTaskLastUpdatedDate}"><display/></field>-->
+
+<!--        &lt;!&ndash; Edit link: passes all values as parameters so Update form is pre-filled &ndash;&gt;-->
+<!--        <field name="edit">-->
+<!--            <hyperlink description="${uiLabelMap.CommonEdit}" target="UpdateClsTask">-->
+<!--                <parameter from-field="taskId" param-name="taskId"/>-->
+<!--                <parameter from-field="title" param-name="title"/>-->
+<!--                <parameter from-field="description" param-name="description"/>-->
+<!--                <parameter from-field="assignedTo" param-name="assignedTo"/>-->
+<!--                <parameter from-field="statusId" param-name="statusId"/>-->
+<!--                <parameter from-field="dueDate" param-name="dueDate"/>-->
+<!--                <parameter from-field="createdDate" param-name="createdDate"/>-->
+<!--                <parameter from-field="lastUpdatedDate" param-name="lastUpdatedDate"/>-->
+<!--            </hyperlink>-->
+<!--        </field>-->
+
+<!--        &lt;!&ndash; Delete link: calls controller mapping to delete &ndash;&gt;-->
+<!--        <field name="delete">-->
+<!--            <hyperlink description="${uiLabelMap.CommonDelete}" target="deleteClsTask">-->
+<!--                <parameter from-field="taskId" param-name="taskId"/>-->
+<!--            </hyperlink>-->
+<!--        </field>-->
+
+<!--    </form>-->
+
+<!--    &lt;!&ndash; Update form (target updateClsTask) &ndash;&gt;-->
+<!--    <form name="UpdateClsTask" type="single" target="updateClsTask">-->
+<!--        <field name="taskId" title="${uiLabelMap.ClsTaskId}"><text/></field>-->
+<!--        <field name="title" title="${uiLabelMap.ClsTaskTitle}"><text/></field>-->
+<!--        <field name="description" title="${uiLabelMap.ClsTaskDescription}"><text/></field>-->
+<!--        <field name="assignedTo" title="${uiLabelMap.ClsTaskAssignedTo}"><text/></field>-->
+<!--        <field name="statusId" title="${uiLabelMap.ClsTaskStatus}"><text/></field>-->
+
+<!--        <field name="dueDate" title="${uiLabelMap.ClsTaskDueDate}">-->
+<!--            <date-time type="date"/>-->
+<!--        </field>-->
+
+<!--        <field name="createdDate" title="${uiLabelMap.ClsTaskCreatedDate}"><date-time type="timestamp"/></field>-->
+<!--        <field name="lastUpdatedDate" title="${uiLabelMap.ClsTaskLastUpdatedDate}"><date-time type="timestamp"/></field>-->
+
+<!--        <field name="submitButton" title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>-->
+<!--    </form>-->
+
+
+</forms>
