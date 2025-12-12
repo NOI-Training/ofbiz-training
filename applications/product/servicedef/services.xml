@@ -226,7 +226,7 @@ under the License.
 
     <!-- Product Association Services -->
 
-    <service name="createProductAssoc" default-entity-name="ProductAssoc" engine="entity-auto" invoke="create" auth="true">
+    <service name="createProductAssoc" default-entity-name="ProductAssoc" engine="entity-auto" invoke="create" auth="true" action="POST" export="true">
         <permission-service service-name="productGenericPermission" main-action="CREATE"/>
         <auto-attributes include="pk" mode="IN" optional="false"/>
         <auto-attributes include="nonpk" mode="IN" optional="true"/>

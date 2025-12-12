@@ -81,7 +81,6 @@ under the License.
     <view-map name="createNote" type="screen" page="component://warehouse-notes/widget/Warehouse-notesScreens.xml#createNoteForm"/>
     <view-map name="listNotes" type="screen" page="component://warehouse-notes/widget/Warehouse-notesScreens.xml#FindNoteForm"/>
     <view-map name="updateVisibility" type="screen" page="component://warehouse-notes/widget/Warehouse-notesScreens.xml#UpdateNoteForm"/>
-    <view-map name="error" type="ftl" page="component://common/webcommon/error/Error.ftl" auth="false"/>
     <!-- View Mappings -->
     <view-map name="main" type="screen" page="component://warehouse-notes/widget/Warehouse-notesScreens.xml#main"/>
 </site-conf>

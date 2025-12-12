@@ -76,7 +76,7 @@ public class WnItemNoteServices {
         if (context.get("page") != null) {
             page = Integer.parseInt(context.get("page").toString());
         }
-        int pageSize = 5;
+        int pageSize = 3;
 
         try {
             String inventoryItemId = (String) context.get("inventoryItemId");

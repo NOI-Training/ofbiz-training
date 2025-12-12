@@ -23,7 +23,7 @@ under the License.
 <body>
   <div>${uiLabelMap.SecurityExtThisEmailIsInResponseToYourRequestToHave} ${uiLabelMap.SecurityExtANew} ${uiLabelMap.SecurityExtPasswordSentToYou}.</div>
   <div>${uiLabelMap.SecurityExtIgnoreEmail}.</div>
-  
+
   <br />
   <div>
       <form method="post" action="<@ofbizUrl fullPath="true" secure="true" webSiteId="${webSiteId!}">passwordChange</@ofbizUrl>?USERNAME=${userLogin.userLoginId!}&TOKEN=${token!}&forgotPwdFlag=true&tenantId=${tenantId!}" name="loginform" id="loginform" target="_blank">

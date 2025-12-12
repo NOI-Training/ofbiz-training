@@ -26,6 +26,8 @@
 /* Make Create button next to Find button */
 .create-form {
     margin-left: 10px;
+    float: right;
+    margin-top: -55px;
 }
 
 /* Inputs */
