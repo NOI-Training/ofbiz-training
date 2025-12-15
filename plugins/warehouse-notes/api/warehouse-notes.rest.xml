@@ -44,4 +44,13 @@ under the License.
             <service name="deleteWnItemNote"/>
         </operation>
     </resource>
+    <resource name="listWnItemNotes"
+              path="warehouse-notes"
+              displayName="Example notes Resource"
+              description="Handles example-notes operations">
+        <operation verb="get" description="List notes"
+                   consumes="application/json">
+            <service name="listWnItemNotes"/>
+        </operation>
+    </resource>
 </api>

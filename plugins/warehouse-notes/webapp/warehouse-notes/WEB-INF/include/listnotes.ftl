@@ -1,5 +1,15 @@
 <style>
 /* Container */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background: #f5f6fa;
+    font-family: "Inter", Arial, sans-serif;
+    color: #222;
+}
 .notes-container {
     max-width: 1100px;
     margin: 30px auto;
@@ -124,15 +134,55 @@
 
 /* Pagination */
 .pagination {
-    margin-top: 20px;
+    margin-top: 25px;
     text-align: center;
     font-size: 15px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
 .pagination a {
     margin: 0 5px;
     text-decoration: none;
+}
+
+/* Page size form inline */
+.page-size-form {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px;
+}
+/* Page size dropdown */
+.pagination select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    background-color: #ffffff;
+    transition: 0.25s;
+}
+
+/* Hover effect */
+.pagination select:hover {
+    border-color: #000;
+}
+
+/* Focus effect */
+.pagination select:focus {
+    border-color: #000;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Dropdown options */
+.pagination select option {
+    font-size: 14px;
+    font-weight: 500;
 }
 
 </style>
@@ -193,15 +243,25 @@ function confirmDelete(noteId) {
 </div>
 <#assign page = (page!1)?number>
 <#assign totalPages = (totalPages!1)?number>
-
+<#assign pageSize = (pageSize!3)?number>
 <div class="pagination">
     <#if page?has_content && (page?number > 1)>
-        <a href="<@ofbizUrl>findNotesEvent?page=${page?number - 1}</@ofbizUrl>"><<</a>
+        <a href="<@ofbizUrl>findNotesEvent?page=${page - 1}&pageSize=${pageSize}</@ofbizUrl>"><<</a>
     </#if>
 
     Page ${page!1} of ${totalPages!1}
 
     <#if page?has_content && totalPages?has_content && (page?number < totalPages?number)>
-        <a href="<@ofbizUrl>findNotesEvent?page=${page?number + 1}</@ofbizUrl>">>></a>
+        <a href="<@ofbizUrl>findNotesEvent?page=${page + 1}&pageSize=${pageSize}</@ofbizUrl>">>></a>
     </#if>
+    <form class="page-size-form" method="get" action="<@ofbizUrl>findNotesEvent</@ofbizUrl>">
+        <input type="hidden" name="page" value="${page}"/>
+        <select name="pageSize" onchange="this.form.submit()">
+            <option value="3"  <#if pageSize == 3>selected</#if>>3</option>
+            <option value="5"  <#if pageSize == 5>selected</#if>>5</option>
+            <option value="10" <#if pageSize == 10>selected</#if>>10</option>
+            <option value="20" <#if pageSize == 20>selected</#if>>20</option>
+            <option value="50" <#if pageSize == 50>selected</#if>>50</option>
+        </select>
+    </form>
 </div>

@@ -76,7 +76,10 @@ public class WnItemNoteServices {
         if (context.get("page") != null) {
             page = Integer.parseInt(context.get("page").toString());
         }
-        int pageSize = 3;
+        int pageSize=3;
+        if (context.get("pageSize") != null) {
+            pageSize = Integer.parseInt(context.get("pageSize").toString());
+        }
 
         try {
             String inventoryItemId = (String) context.get("inventoryItemId");
@@ -113,6 +116,7 @@ public class WnItemNoteServices {
 
             result.put("listIt", pagedList);
             result.put("page", page);
+            result.put("pageSize", pageSize);
             result.put("totalPages", totalPages);
             return result;
 

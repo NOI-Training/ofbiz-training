@@ -59,6 +59,7 @@ under the License.
                 <set field="listIt" from-field="parameters.listIt"/>
                 <set field="totalPages" from-field="parameters.totalPages"/>
                 <set field="page" from-field="parameters.page"/>
+                <set field="pageSize" from-field="parameters.pageSize"/>
                 <set field="layoutSettings.styleSheets[]" value="/LMS/css/style.css"/>
             </actions>
             <widgets>

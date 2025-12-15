@@ -44,10 +44,11 @@ under the License.
              engine="java"
              location="com.companyname.service.WnItemNoteServices"
              invoke="findNotes"
-             auth="false">
+             auth="false" export="true" action="POST">
         <description>List notes for an inventory item</description>
         <attribute name="inventoryItemId" type="String" mode="IN" optional="true"/>
         <attribute name="page" type="Integer" mode="IN" optional="true"/>
+        <attribute name="pageSize" type="Integer" mode="IN" optional="true"/>
         <attribute name="listIt" type="List" mode="OUT"/>
         <attribute name="page" type="Integer" mode="OUT"/>
         <attribute name="totalPages" type="Integer" mode="OUT"/>
@@ -82,8 +83,6 @@ under the License.
              location="com.companyname.service.WnItemNoteServices"
              invoke="deleteWnItemNote" export="true" action="POST">
         <description>Deletes a warehouse item note</description>
-
         <attribute name="noteId" type="String" mode="IN" optional="false"/>
     </service>
-
 </services>

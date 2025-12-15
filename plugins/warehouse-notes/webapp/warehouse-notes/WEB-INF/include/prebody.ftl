@@ -20,12 +20,12 @@ html, body {
     background: #f5f6fa;
     font-family: "Inter", Arial, sans-serif;
     color: #222;
-    overflow: hidden;
 }
 
 .container {
     flex: 1 0 auto;
     padding: 20px;
+    overflow: hidden;
 }
 
 /* --- Top Navigation --- */
@@ -108,7 +108,7 @@ footer {
                <a href="<@ofbizUrl>listNotes</@ofbizUrl>">Find Notes</a>
          </li>
           <li class="pull-right">
-                <a href="<@ofbizUrl>logout</@ofbizUrl>" title="${uiLabelMap.CommonLogout}">logout</a>
+                <a href="<@ofbizUrl>logout</@ofbizUrl>" title="${uiLabelMap.CommonLogout}">Logout</a>
           </li>
           </ul>
         </div>
