@@ -1,0 +1,9 @@
+<service-eca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/service-eca.xsd">
+
+    <!-- SECA Trigger after updateWnNoteVisibility -->
+    <eca service="updateWnNoteVisibility" event="return">
+        <action service="logVisibilityChange" mode="sync"/>
+    </eca>
+
+</service-eca>

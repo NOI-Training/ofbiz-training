@@ -25,24 +25,32 @@ under the License.
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/rest-api.xsd">
 
-    <resource name="ExampleProductResource"
-              path="product"
-              displayName="Example Product Resource"
-              description="Handles example-product operations">
+    <resource name="createWnItemNote"
+              path="warehouse-notes"
+              displayName="Example notes Resource"
+              description="Handles example-notes operations">
 
-        <operation verb="post" description="Find product by id"
+        <operation verb="post" description="create notes by id"
                    consumes="application/json">
-            <service name="findProductById"/>
+            <service name="createWnItemNote"/>
         </operation>
     </resource>
-    <resource name="createProductAssoc"
-              path="ProductAssoc"
-              displayName="Example Product Resource"
-              description="Handles example-product operations">
-
-        <operation verb="post" description="createProductAssoc"
+    <resource name="deleteWnItemNote"
+              path="warehouse-notes"
+              displayName="Example notes Resource"
+              description="Handles example-notes operations">
+        <operation verb="delete" description="delete notes"
                    consumes="application/json">
-            <service name="createProductAssoc"/>
+            <service name="deleteWnItemNote"/>
+        </operation>
+    </resource>
+    <resource name="listWnItemNotes"
+              path="warehouse-notes"
+              displayName="Example notes Resource"
+              description="Handles example-notes operations">
+        <operation verb="get" description="List notes"
+                   consumes="application/json">
+            <service name="listWnItemNotes"/>
         </operation>
     </resource>
 </api>

@@ -28,7 +28,7 @@ under the License.
     <#if csrfDefenseStrategy != "org.apache.ofbiz.security.NoCsrfDefenseStrategy">
         <meta name="csrf-token" content="<@csrfTokenAjax/>"/>
     </#if>
-    <title>${layoutSettings.companyName}: <#if (titleProperty)?has_content>${uiLabelMap[titleProperty]}<#else>${title!}</#if></title>
+    <title>${(layoutSettings.companyName)!"OFBiz"}: <#if (titleProperty)?has_content>${uiLabelMap[titleProperty]}<#else>${title!}</#if></title>
 <#if layoutSettings.shortcutIcon?has_content>
     <#assign shortcutIcon = layoutSettings.shortcutIcon/>
 <#elseif layoutSettings.VT_SHORTCUT_ICON?has_content>

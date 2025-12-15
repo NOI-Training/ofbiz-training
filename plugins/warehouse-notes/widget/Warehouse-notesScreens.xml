@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="main">
+        <section>
+            <actions>
+                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="Warehouse-notesCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <label text="Hello"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="createNoteForm">
+        <section>
+            <actions>
+                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="Warehouse-notesCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+<!--                        <include-form name="createNoteForm" location="component://warehouse-notes/widget/Warehouse-notesForms.xml"/>-->
+                        <platform-specific>
+                            <html><html-template location="component://warehouse-notes/webapp/warehouse-notes/WEB-INF/include/createNote.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="FindNoteForm">
+        <section>
+            <actions>
+                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+                <set field="listIt" from-field="parameters.listIt"/>
+                <set field="totalPages" from-field="parameters.totalPages"/>
+                <set field="page" from-field="parameters.page"/>
+                <set field="pageSize" from-field="parameters.pageSize"/>
+                <set field="layoutSettings.styleSheets[]" value="/LMS/css/style.css"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="Warehouse-notesCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+<!--                        <include-form name="FindNotes" location="component://warehouse-notes/widget/Warehouse-notesForms.xml"/>-->
+<!--                        <include-form name="ListNotes" location="component://warehouse-notes/widget/Warehouse-notesForms.xml"/>-->
+                        <platform-specific>
+                            <html><html-template location="component://warehouse-notes/webapp/warehouse-notes/WEB-INF/include/listnotes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="UpdateNoteForm">
+        <section>
+            <actions>
+                <set field="headerItem" value="main"/><!-- this highlights the selected menu-item with name "main" -->
+            </actions>
+            <widgets>
+                <decorator-screen name="Warehouse-notesCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+<!--                        <include-form name="UpdateWnItemNote" location="component://warehouse-notes/widget/Warehouse-notesForms.xml"/>-->
+                        <platform-specific>
+                            <html><html-template location="component://warehouse-notes/webapp/warehouse-notes/WEB-INF/include/UpdateNotes.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>

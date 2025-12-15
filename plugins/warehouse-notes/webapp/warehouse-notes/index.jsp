@@ -1,4 +1,4 @@
-<#--
+<%--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -15,21 +15,6 @@ software distributed under the License is distributed on an
 KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
--->
+--%>
 
-<html>
-<head>
-</head>
-<body>
-  <div>${uiLabelMap.SecurityExtThisEmailIsInResponseToYourRequestToHave} ${uiLabelMap.SecurityExtANew} ${uiLabelMap.SecurityExtPasswordSentToYou}.</div>
-  <div>${uiLabelMap.SecurityExtIgnoreEmail}.</div>
-
-  <br />
-  <div>
-      <form method="post" action="<@ofbizUrl fullPath="true" secure="true" webSiteId="${webSiteId!}">passwordChange</@ofbizUrl>?USERNAME=${userLogin.userLoginId!}&TOKEN=${token!}&forgotPwdFlag=true&tenantId=${tenantId!}" name="loginform" id="loginform" target="_blank">
-        <input type="submit" name="submit" value="${uiLabelMap.ResetPassword}" />
-      </form>
-      ${uiLabelMap.SecurityExtLinkOnce}.
-  </div>
-</body>
-</html>
+<%response.sendRedirect("control/main");%>
